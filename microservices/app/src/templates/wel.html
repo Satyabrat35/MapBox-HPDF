@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block head %}
+	{{ super() }}
+	<
+  <link href= "{{ url_for('static', filename='css/home.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block title %}
+<h1>Say your choice :</h1>
+</br>
+</br>
+<ul>
+	<li><a href="/locate">Locate your fav place!!</a></li>
+	<li><a href="/navigate">Wanna go for a Trip?</a></li>
+</ul>
+
+{% endblock %}

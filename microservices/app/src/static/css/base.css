@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+@import url('https://fonts.googleapis.com/css?family=Satisfy');
+
+body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		color: white;
+		font-family: 'Slabo 27px', serif;
+		background-color:#000d1a;
+		font-size: 18px;
+    min-height: 100%;
+	}
+
+a{
+  text-decoration: underline;
+  color: inherit;
+}
+
+header {
+		background-color: Transparent;
+    color: #BF360C;
+    text-align: center;
+    align-content: center;
+    font-family: 'Satisfy', cursive;
+		font-size: 16px;
+    padding-top: 0.6rem;
+	}
+
+header  p{
+	float: right;
+	font-size: 18px;
+	padding-right: 10px;
+}
+
+footer {
+	position: fixed;
+  color: #BF360C;
+	text-align: right;
+  font-size: 12px;
+	bottom: 0;
+	right: 0;
+  padding: 0.5rem;
+  background-color: Transparent;
+}

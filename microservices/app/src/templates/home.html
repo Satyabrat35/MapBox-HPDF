@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block head %}
+	{{ super() }}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/home.js') }}"></script>
+	<link href= "{{ url_for('static', filename='css/home.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+
+<div class="head">
+	 <h1><font color="#FAFAFA">MAP</font><font color="#BF360C">BOX</font></h1>
+</div>
+
+<div class="options">
+	<button class="button" id="login" style="vertical-align:middle"><span>Login </span></button>
+	<button class="button" id="signup" style="vertical-align: middle"><span>Sign Up</span></button>
+</div>	
+
+{% endblock %}

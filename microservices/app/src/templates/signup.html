@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block head %}
+	{{ super() }}
+		<script type="text/javascript">
+		var password = document.getElementById("password")
+  	, confirm_password = document.getElementById("conf_password");
+
+	function validatePassword(){
+  		if(password.value != confirm_password.value) {
+    		confirm_password.setCustomValidity("Passwords Don't Match");
+  		} else {
+    		confirm_password.setCustomValidity('');
+  		}
+	}
+	window.onload =function() {
+
+	password.onchange = validatePassword;
+	confirm_password.onkeyup = validatePassword;
+	sign_up = document.getElementById('signup');
+    form = document.getElementById('myForm');
+    sign_up.onclick = function() {
+		form.action = "/signup"
+	}
+	}
+	
+		</script>
+  <link href= "{{ url_for('static', filename='css/signup.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+
+
+<div class="signup">
+  <form  action="/signup" id="myForm" align-content="center" method="POST" >
+    Username : <input type="text" name="username" id="username" /><br/>
+    Password : <input type="password" name="password" id="password" /><br/>
+    Confirm Password : <input type="password" name="conf_password" id="conf_password" />
+    <br/><br/>	
+	  <input type="submit" id="signup" style="vertical-align:middle" value="Sign up">
+	 <div>
+	{% for i in get_flashed_messages() %}
+	<p><font color="yellow" style="vertical-align: middle">{{ i }}</font></p>
+	{% endfor %}
+	 </div>
+</div>
+
+{% endblock %}

@@ -22,7 +22,7 @@ def signup():
     password = request.form['password']
 
     # This is the url to which the query is made
-    url = "https://auth.bejewel65.hasura-app.io/v1/signup"
+    url = "https://auth.coalitionist99.hasura-app.io/v1/signup"
 
     # This is the json payload for the query
     params = {
@@ -36,7 +36,7 @@ def signup():
     # Setting headers
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer d1fc4f121d8f03fedd43bce51f936ef8cc57f5c868055795"
+        "Authorization": "Bearer f82e920a8d6d584fe1ad8231f1e64ad417a41679a63fc327"
     }
 
     # Make the query and store response in resp
@@ -64,9 +64,9 @@ def signin():
     password = request.form['password']
 
     # This is the url to which the query is made
-    #url = "https://auth.bejewel65.hasura-app.io/v1/signup"
+    #url = "https://auth.coalitionist99.hasura-app.io/v1/signup"
     # This is the url to which the query is made
-    url = "https://auth.bejewel65.hasura-app.io/v1/login"
+    url = "https://auth.coalitionist99.hasura-app.io/v1/login"
 
     # This is the json payload for the query
     requestPayload = {
@@ -86,6 +86,23 @@ def signin():
     resp = requests.request("POST", url, data=json.dumps(requestPayload), headers=headers)
 
     # resp.content contains the json response.
+    #auth_token=None
+    #name = None
     print(resp.content)
     data = json.loads(resp.content)
-    return data
+    if "message" in data.keys():
+        flash(data["message"])
+    else:
+        auth_token = data["auth_token"]
+        name = data["username"]
+        flash("Hello {}".format(data["username"]))
+        return render_template('wel.html',auth_token=auth_token ,name=name)
+    return render_template('login.html')
+    
+@app.route('/locate')
+def loc():
+    return render_template('locate.html')
+
+@app.route('/navigate')
+def navigate():
+    return render_template('navigate.html')    

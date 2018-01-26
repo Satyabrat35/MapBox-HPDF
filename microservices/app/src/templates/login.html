@@ -7,11 +7,6 @@
 {% endblock %}
 {% block content %}
 
-<div>
-	{% for i in get_flashed_messages() %}
-	<p><font color="yellow" style="vertical-align: middle">{{ i }}</font></p>
-	{% endfor %}
-</div>
 
 <div class="login">
   <form  action="/signin" id="myForm" align-content="center" method="POST">
@@ -19,7 +14,11 @@
     Password : <input type="password" name="password"/>
     <br/><br/>
 	  <button type="submit" id="signin" style="vertical-align: middle">Log In</button>
-	</form>	  
+	<div>
+	{% for i in get_flashed_messages() %}
+	<p><font color="yellow" style="vertical-align: middle">{{ i }}</font></p>
+	{% endfor %}
+	</div> 
 </div>
 
 {% endblock %}

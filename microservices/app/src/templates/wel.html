@@ -2,16 +2,21 @@
 {% block title %}{% endblock %}
 {% block head %}
 	{{ super() }}
-	<
+	
   <link href= "{{ url_for('static', filename='css/home.css') }}" rel="stylesheet" />
+<header>
+	<h6><font color="blue" style="vertical-align: right">Hello {{ name }}</font></h6>
+	<a href="/logout"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_LSMB-JfAQUZb7OVcQCsgiJjy5KoFvmmfQCvfFW_WOjwFc-ng" width="30" height="30" align="right" alt="Logout"></a>
+</header>
 {% endblock %}
-{% block title %}
-<h1>Say your choice :</h1>
+{% block content %}
+<h3><font color="yellow" style="vertical-align: middle">Say your choice :</h3>
 </br>
 </br>
-<ul>
-	<li><a href="/locate">Locate your fav place!!</a></li>
-	<li><a href="/navigate">Wanna go for a Trip?</a></li>
-</ul>
-
+<table>
+	<tr>
+		<th><font color="red" size="30px">Find your favourite <a href="/locate">Place</a></font></th>
+		<th><font color="red" size="30px">Wanna find out how much time you <a href="/navigate">require</a> to meet your bestie</font></th>
+	</tr>
+</table>
 {% endblock %}

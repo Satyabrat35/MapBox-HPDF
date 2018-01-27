@@ -5,18 +5,21 @@
 	
   <link href= "{{ url_for('static', filename='css/home.css') }}" rel="stylesheet" />
 <header>
-	<h6><font color="blue" style="vertical-align: right">Hello {{ name }}</font></h6>
 	<a href="/logout"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_LSMB-JfAQUZb7OVcQCsgiJjy5KoFvmmfQCvfFW_WOjwFc-ng" width="30" height="30" align="right" alt="Logout"></a>
 </header>
 {% endblock %}
 {% block content %}
-<h3><font color="yellow" style="vertical-align: middle">Say your choice :</h3>
-</br>
+<p align="right"><font color="blue" size="4px">Hello {{ name }}<p></font>
 </br>
 <table>
 	<tr>
-		<th><font color="red" size="30px">Find your favourite <a href="/locate">Place</a></font></th>
-		<th><font color="red" size="30px">Wanna find out how much time you <a href="/navigate">require</a> to meet your bestie</font></th>
+		<font color="green" size="7px"><a style="text-decoration: none" href="/locate">   🌎</a></font><font color="yellow" size="10px"> Find your favourite Place!!</font>
+	</tr>
+	<br/>
+	<br/>
+	<br/>
+	<tr>
+		<font color="green" size="7px"><a style="text-decoration: none" href="/navigate">   🌎</a></font><font color="yellow" size="10px"> Wanna find out how much time you require to meet your bestie</font>
 	</tr>
 </table>
 {% endblock %}

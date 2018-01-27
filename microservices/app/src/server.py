@@ -98,7 +98,7 @@ def signin():
         rsp = make_response(render_template('wel.html',name=name))
         rsp.set_cookie('Auth_Token',data["auth_token"])
         #flash("Hello {}".format(data["username"]))
-        return resp
+        return rsp
     return render_template('login.html')
     
 @app.route('/locate')

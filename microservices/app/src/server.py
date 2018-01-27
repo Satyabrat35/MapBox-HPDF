@@ -1,5 +1,5 @@
 from src import app
-from flask import render_template, request, json ,flash
+from flask import render_template, request, json ,flash , make_response
 import requests
 import json
 
@@ -81,6 +81,7 @@ def signin():
     headers = {
         "Content-Type": "application/json"
     }
+    #auth_token = ""
 
     # Make the query and store response in resp
     resp = requests.request("POST", url, data=json.dumps(requestPayload), headers=headers)
@@ -93,10 +94,11 @@ def signin():
     if "message" in data.keys():
         flash(data["message"])
     else:
-        auth_token = data["auth_token"]
         name = data["username"]
-        flash("Hello {}".format(data["username"]))
-        return render_template('wel.html',auth_token=auth_token ,name=name)
+        rsp = make_response(render_template('wel.html',name=name))
+        rsp.set_cookie('Auth_Token',data["auth_token"])
+        #flash("Hello {}".format(data["username"]))
+        return resp
     return render_template('login.html')
     
 @app.route('/locate')
@@ -105,4 +107,32 @@ def loc():
 
 @app.route('/navigate')
 def navigate():
-    return render_template('navigate.html')    
+    return render_template('navigate.html')
+
+@app.route('/logout')
+def logout():
+    auth_token = request.cookies.get('Auth_Token')
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + str(auth_token)
+    }    
+    url = "https://auth.coalitionist99.hasura-app.io/v1/user/logout"
+
+    resp = requests.request("POST",url,headers=headers)
+    print auth_token
+    data = json.loads(resp.content)
+    if "message" in data.keys():
+        flash(data["message"])
+        return render_template('login.html')
+    else:
+        return render_template('home.html')
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('500.html'), 500
+

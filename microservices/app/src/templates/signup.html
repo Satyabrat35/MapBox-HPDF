@@ -2,32 +2,17 @@
 {% block title %}{% endblock %}
 {% block head %}
 	{{ super() }}
-		<script type="text/javascript">
-		var password = document.getElementById("password")
-  	, confirm_password = document.getElementById("conf_password");
+<script type="text/javascript" src="{{ url_for('static', filename='js/signup.js') }}"></script>
 
-	function validatePassword(){
-  		if(password.value != confirm_password.value) {
-    		confirm_password.setCustomValidity("Passwords Don't Match");
-  		} else {
-    		confirm_password.setCustomValidity('');
-  		}
-	}
-	window.onload =function() {
-
-	password.onchange = validatePassword;
-	confirm_password.onkeyup = validatePassword;
-	sign_up = document.getElementById('signup');
-    form = document.getElementById('myForm');
-    sign_up.onclick = function() {
-		form.action = "/signup"
-	}
-	}
-	
-		</script>
   <link href= "{{ url_for('static', filename='css/signup.css') }}" rel="stylesheet" />
+  <header>
+  	<a href="/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT89rfuHaL1DFzhtV1Ucri-E5Ameyf9ZwZFShJ0EG8-XHjQUIZm"
+  	width="40" height="40" align="right" alt="Home"></a>
+  </header>
 {% endblock %}
 {% block content %}
+<br/>
+<br/>
 
 
 <div class="signup">

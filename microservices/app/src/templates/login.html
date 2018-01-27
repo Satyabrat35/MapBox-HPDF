@@ -4,9 +4,15 @@
 	{{ super() }}
 	<script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
   <link href= "{{ url_for('static', filename='css/login.css') }}" rel="stylesheet" />
+  <header>
+  	<a href="/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT89rfuHaL1DFzhtV1Ucri-E5Ameyf9ZwZFShJ0EG8-XHjQUIZm"
+  	width="40" height="40" align="right" alt="Home"></a>
+  </header>
 {% endblock %}
 {% block content %}
 
+<br/>
+<br/>
 
 <div class="login">
   <form  action="/signin" id="myForm" align-content="center" method="POST">

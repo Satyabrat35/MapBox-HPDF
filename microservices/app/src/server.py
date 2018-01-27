@@ -119,7 +119,6 @@ def logout():
     url = "https://auth.coalitionist99.hasura-app.io/v1/user/logout"
 
     resp = requests.request("POST",url,headers=headers)
-    print auth_token
     data = json.loads(resp.content)
     if "message" in data.keys():
         flash(data["message"])

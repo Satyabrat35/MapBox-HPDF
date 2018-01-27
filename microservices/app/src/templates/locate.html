@@ -1,34 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8' />
-    <title>Locate</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding: 0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
+	<title>Locate</title>
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
-
+<header>
+	<p align="middle"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPbm_0lS_no4FTPLR903QhiRNBAFbsuJcXAQAR7V4otlcmH2tO" height="23" width="23"><font color="blue" size="5px"> Retrieve Places</font>
+	<a href="/logout"><img src="https://image.freepik.com/free-icon/sign-out-option_318-41892.jpg" width="30" height="30" align="right" alt="Logout"></a></p>
+</header>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.1.1/mapbox-gl-geocoder.min.js'></script>
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.1.1/mapbox-gl-geocoder.css' type='text/css' />
-<div id='map'></div>
-
+<style>
+#geocoder-container > div {
+    min-width:100%;
+    margin-left:20%;
+    padding-right: 50px;
+}
+</style>
+<div id='map' style='width: 1275px; height: 600px;' align="justify"></div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXJpazM1IiwiYSI6ImNqYm0yYTZmaTRya2gycnFmYndvanFwMzIifQ.HeBrixh5h2c1qRLhve7lIg';
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v9',
-    center: [-79.4512, 43.6568],
-    zoom: 13
+    style: 'mapbox://styles/mapbox/outdoors-v9',
+    zoom: 5,
+    center: [-75,40]
 });
 
-map.addControl(new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken
-}));
+// Add search option in map
+var geocoder = new MapboxGeocoder({
+accessToken: mapboxgl.accessToken
+});
+
+map.addControl(geocoder);
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
+
+// Add styling to point
+map.on('load', function() {
+    map.addSource('single-point', {
+        "type": "geojson",
+        "data": {
+            "type": "FeatureCollection",
+            "features": []
+        }
+    });
+
+ map.addLayer({
+        "id": "point",
+        "source": "single-point",
+        "type": "circle",
+        "paint": {
+            "circle-radius": 15,
+            "circle-color": "#009cbf"
+        }
+    });
+ geocoder.on('result', function(ev) {
+        map.getSource('single-point').setData(ev.result.geometry);
+    });
+});
 </script>
 </body>
 </html>

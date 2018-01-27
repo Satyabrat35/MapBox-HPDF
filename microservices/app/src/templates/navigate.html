@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8' />
-    <title>Navigate</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding: 0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
+	<title>Locate</title>
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
-
+<header>
+	<p align="middle"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPbm_0lS_no4FTPLR903QhiRNBAFbsuJcXAQAR7V4otlcmH2tO" height="23" width="23"><font color="blue" size="5px"> Navigate Through</font>
+	<a href="/logout"><img src="https://image.freepik.com/free-icon/sign-out-option_318-41892.jpg" width="30" height="30" align="right" alt="Logout"></a></p>
+</header>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.js'></script>
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.css' type='text/css' />
-<div id='map'></div>
-
+<div id='map' style='width: 1275px; height: 600px;' align="justify"></div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXJpazM1IiwiYSI6ImNqYm0yYTZmaTRya2gycnFmYndvanFwMzIifQ.HeBrixh5h2c1qRLhve7lIg';
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v9',
-    center: [-79.4512, 43.6568],
-    zoom: 13
+    style: 'mapbox://styles/mapbox/outdoors-v9',
+    zoom: 5,
+    center: [-75,40]
 });
 
+// Add Navigation
 map.addControl(new MapboxDirections({
     accessToken: mapboxgl.accessToken
 }), 'top-left');
-</script>
 
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
+
+</script>
 </body>
 </html>

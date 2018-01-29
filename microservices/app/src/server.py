@@ -97,6 +97,7 @@ def signin():
         name = data["username"]
         rsp = make_response(render_template('wel.html',name=name))
         rsp.set_cookie('Auth_Token',data["auth_token"])
+        rsp.set_cookie('Name',data["username"])
         #flash("Hello {}".format(data["username"]))
         return rsp
     return render_template('login.html')
@@ -135,3 +136,7 @@ def page_not_found(e):
 def page_not_found(e):
     return render_template('500.html'), 500
 
+@app.route('/back')
+def back():
+	name = request.cookies.get('Name')
+	return render_template('wel.html',name=name)

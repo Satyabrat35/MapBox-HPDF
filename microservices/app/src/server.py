@@ -40,7 +40,6 @@ def signup():
     }
 
     # Make the query and store response in resp
-    #resp = requests.request("POST", url, data=json.dumps(requestPayload), headers=headers)
     if request.form['password'] == request.form['conf_password']:
         resp=requests.request("POST",url=url,data=json.dumps(params),headers=headers)
         print(resp.content)
@@ -63,9 +62,6 @@ def signin():
     username = request.form['username']
     password = request.form['password']
 
-    # This is the url to which the query is made
-    #url = "https://auth.coalitionist99.hasura-app.io/v1/signup"
-    # This is the url to which the query is made
     url = "https://auth.coalitionist99.hasura-app.io/v1/login"
 
     # This is the json payload for the query
@@ -81,14 +77,11 @@ def signin():
     headers = {
         "Content-Type": "application/json"
     }
-    #auth_token = ""
 
     # Make the query and store response in resp
     resp = requests.request("POST", url, data=json.dumps(requestPayload), headers=headers)
 
     # resp.content contains the json response.
-    #auth_token=None
-    #name = None
     print(resp.content)
     data = json.loads(resp.content)
     if "message" in data.keys():
@@ -110,6 +103,11 @@ def loc():
 def navigate():
     return render_template('navigate.html')
 
+#@app.route('/navigate_2')
+#def navigate_2():
+#	return render_template('navigate_2.html')    
+# For extra additions
+
 @app.route('/logout')
 def logout():
     auth_token = request.cookies.get('Auth_Token')
@@ -121,6 +119,7 @@ def logout():
 
     resp = requests.request("POST",url,headers=headers)
     data = json.loads(resp.content)
+    #session.clear()
     if "message" in data.keys():
         flash(data["message"])
         return render_template('login.html')

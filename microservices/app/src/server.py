@@ -16,6 +16,10 @@ def login():
 def sup():
     return render_template('signup.html')
 
+@app.route("/change_p")
+def cpass():
+	return render_template('change_password.html')    
+
 @app.route("/signup", methods=['POST'])
 def signup():
     username = request.form['username']
@@ -82,7 +86,7 @@ def signin():
     resp = requests.request("POST", url, data=json.dumps(requestPayload), headers=headers)
 
     # resp.content contains the json response.
-    print(resp.content)
+    #print(resp.content)
     data = json.loads(resp.content)
     if "message" in data.keys():
         flash(data["message"])
@@ -102,6 +106,7 @@ def loc():
 @app.route('/navigate')
 def navigate():
     return render_template('navigate.html')
+
 
 #@app.route('/navigate_2')
 #def navigate_2():
@@ -139,3 +144,34 @@ def page_not_found(e):
 def back():
 	name = request.cookies.get('Name')
 	return render_template('wel.html',name=name)
+
+@app.route('/change_pass',methods=['POST'])
+def change_pass():
+	old_password = request.form['old_password']
+	new_password = request.form['new_password']
+	auth_token = request.cookies.get('Auth_Token')
+	params = {
+		"old_password": old_password,
+		"new_password": new_password
+	}
+	headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + str(auth_token)
+    }
+    	url = "https://auth.coalitionist99.hasura-app.io/v1/providers/username/change-password"
+        # Make the query and store response in resp
+    	if request.form['new_password'] == request.form['conf_new_password']:
+        	resp=requests.request("POST",url=url,data=json.dumps(params),headers=headers)
+        	sq = json.loads(resp.content)
+        	if "message" in sq.keys():
+        		flash(sq["message"])
+        		return render_template('login.html')		
+        else:
+        	flash('Password do not match')
+
+        return render_template('change_password.html')				
+
+    # resp.content contains the json response.
+    #flash('Password do not match')
+    #return render_template('signup.html')
+

@@ -16,10 +16,12 @@
 
 <div class="login">
   <form  action="/signin" id="myForm" align-content="center" method="POST">
-    Username : <input type="text" name="username"/><br/>
+    Username : <input type="text" name="username"/>
+    <br/>
     Password : <input type="password" name="password"/>
     <br/><br/>
 	  <button type="submit" id="signin" style="vertical-align: middle">Log In</button>
+    <br/>
 	<div>
 	{% for i in get_flashed_messages() %}
 	<p><font color="yellow" style="vertical-align: middle">{{ i }}</font></p>

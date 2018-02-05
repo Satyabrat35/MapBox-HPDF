@@ -1,6 +1,6 @@
-# hello-python-flask
+# MapBox
 
-Boilerplate Hasura project with [Flask](http://flask.pocoo.org/) microservice.
+Boilerplate Hasura project with [Mapbox](https://www.mapbox.com/) microservice.
 
 
 ## Getting started
@@ -371,4 +371,3 @@ $ docker run --rm -it -p 8080:8080 \
 ```
 
 Now, any change you make to your source code will be immediately updated on the running app.
-

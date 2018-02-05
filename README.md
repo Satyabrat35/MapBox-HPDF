@@ -10,6 +10,7 @@ Boilerplate Hasura project with [Mapbox](https://www.mapbox.com/) microservice.
 - [Hasura CLI](https://docs.hasura.io/0.15/manual/install-hasura-cli.html)
 - [Git](https://git-scm.com)
 - [Python 3](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/installing/) (required only for local development)
+- [Mapbox API](https://www.mapbox.com/api-documentation/?language=Python#introduction)
 
 ### Quickstart
 

@@ -150,28 +150,22 @@ def change_pass():
 	old_password = request.form['old_password']
 	new_password = request.form['new_password']
 	auth_token = request.cookies.get('Auth_Token')
-	params = {
+	headers = {
+		"Content-Type": "application/json",
+        "Authorization": "Bearer " + str(auth_token)
+	}
+	requestPayload = {
 		"old_password": old_password,
 		"new_password": new_password
 	}
-	headers = {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + str(auth_token)
-    }
-    	url = "https://auth.coalitionist99.hasura-app.io/v1/providers/username/change-password"
-        # Make the query and store response in resp
-    	if request.form['new_password'] == request.form['conf_new_password']:
-        	resp=requests.request("POST",url=url,data=json.dumps(params),headers=headers)
-        	sq = json.loads(resp.content)
-        	if "message" in sq.keys():
-        		flash(sq["message"])
-        		return render_template('login.html')		
-        else:
-        	flash('Password do not match')
+	url = "https://auth.coalitionist99.hasura-app.io/v1/providers/username/change-password"
 
-        return render_template('change_password.html')				
-
-    # resp.content contains the json response.
-    #flash('Password do not match')
-    #return render_template('signup.html')
-
+	if request.form['new_password'] == request.form['conf_new_password']:
+		resp = requests.request("POST", url, data=json.dumps(requestPayload), headers=headers)
+		data = json.loads(resp.content)
+		if "message" in data.keys():
+			flash(data['message'])
+			return render_template('login.html')
+	else:
+		flash('Password do not match')
+		return render_template('change_password.html')		

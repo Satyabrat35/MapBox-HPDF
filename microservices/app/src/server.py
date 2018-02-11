@@ -1,8 +1,10 @@
 from src import app
-from flask import render_template, request, json ,flash , make_response
+from flask import render_template, request, json ,flash , make_response , redirect ,url_for
 import requests
 import json
 
+global auth_token
+auth_token = None
 
 @app.route("/")
 def home():
@@ -18,7 +20,10 @@ def sup():
 
 @app.route("/change_p")
 def cpass():
-	return render_template('change_password.html')    
+	if auth_token != None:
+		return render_template('change_password.html')
+	flash('Login first')	
+	return render_template('login.html')    
 
 @app.route("/signup", methods=['POST'])
 def signup():
@@ -42,6 +47,7 @@ def signup():
         "Content-Type": "application/json",
         "Authorization": "Bearer f82e920a8d6d584fe1ad8231f1e64ad417a41679a63fc327"
     }
+    auth_token = None
 
     # Make the query and store response in resp
     if request.form['password'] == request.form['conf_password']:
@@ -81,6 +87,7 @@ def signin():
     headers = {
         "Content-Type": "application/json"
     }
+    auth_token = None
 
     # Make the query and store response in resp
     resp = requests.request("POST", url, data=json.dumps(requestPayload), headers=headers)
@@ -101,12 +108,19 @@ def signin():
     
 @app.route('/locate')
 def loc():
-    return render_template('locate.html')
+	#auth_token = request.cookies.get('Auth_Token')
+	if auth_token != None:
+		return render_template('locate.html')
+	flash('Login first')	
+	return render_template('login.html')	
 
 @app.route('/navigate')
 def navigate():
-    return render_template('navigate.html')
-
+    #auth_token = request.cookies.get('Auth_Token')
+    if auth_token != None:
+    	return render_template('navigate.html')
+    flash('Login first')	
+    return render_template('login.html')	
 
 #@app.route('/navigate_2')
 #def navigate_2():
@@ -125,6 +139,9 @@ def logout():
     resp = requests.request("POST",url,headers=headers)
     data = json.loads(resp.content)
     #session.clear()
+    auth_token = None
+    print auth_token
+    
     if "message" in data.keys():
         flash(data["message"])
         return render_template('login.html')
@@ -168,4 +185,4 @@ def change_pass():
 			return render_template('login.html')
 	else:
 		flash('Password do not match')
-		return render_template('change_password.html')		
+		return render_template('change_password.html')

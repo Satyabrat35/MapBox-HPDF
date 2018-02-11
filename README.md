@@ -106,15 +106,3 @@ To create a microservice use the following commands:
 
 To know more read the [hasura docs](https://docs.hasura.io/)
 
-## Sample preview of project 
-**Home page**
-![]({{site.baseurl}}/https://raw.github.com/Satyabrat35/MapBox-HPDF/blob/master/microservices/app/src/images/home.png)
-
-**After logging in**
-![]({{site.baseurl}}/https://raw.github.com/Satyabrat35/MapBox-HPDF/blob/master/microservices/app/src/images/main.png)
-
-**Retrieve Locations**
-![]({{site.baseurl}}/https://raw.github.com/Satyabrat35/MapBox-HPDF/blob/master/microservices/app/src/images/search.png)
-
-**Finding out distances**
-![]({{site.baseurl}}/https://raw.github.com/Satyabrat35/MapBox-HPDF/blob/master/microservices/app/src/images/navigate.png)

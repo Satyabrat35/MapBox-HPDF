@@ -106,4 +106,3 @@ To create a microservice use the following commands:
 
 To know more read the [hasura docs](https://docs.hasura.io/)
 
-

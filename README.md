@@ -1,9 +1,22 @@
 # MapBox
 
-Boilerplate Hasura project with [Mapbox](https://www.mapbox.com/) microservice.
+ Hasura project on [Mapbox](https://www.mapbox.com/) Geolocation API
 
 
 ## Getting started
+
+Follow these steps to get started with development using this project.
+
+		hasura-cli
+
+In order to get started with development you have to install the hasura cli.To install copy this code to your terminal .
+
+
+		$ curl -L https://hasura.io/install.sh | bash
+
+Once installed login to hasura using
+
+		$ hasura login
 
 ### Prerequisites
 

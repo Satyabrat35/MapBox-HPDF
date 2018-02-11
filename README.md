@@ -80,3 +80,26 @@ Go to [http://localhost:8080](http://localhost:8080) using your browser to see t
 You can keep the gunicorn server running and when you edit source code and save the files, the server will be reload the new code automatically.
 Once you have made required changes, you can [deploy them to Hasura cluster](#deploy).
 
+
+## Microservices
+
+Contains the microservices created by the user in the project. Each microservice has a route which is of the format
+
+	<microservice-name>.<cluster-name>.hasura-app.io
+
+Create a microservice
+
+To create a microservice use the following commands:
+
+# To list a number of templates for creating a microservice
+	$ hasura microservice template-list
+
+# To create a microservice
+	$ hasura microservice create <ms-name> --template=<template-name>
+
+# Add routes for the microservice
+	$ hasura conf generate-route <ms-name> >> conf/routes.yaml
+	$ hasura conf generate-remote <ms-name> >> conf/ci.yaml
+
+
+

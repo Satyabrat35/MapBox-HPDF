@@ -16,6 +16,10 @@ In order to get started with development you have to install the hasura cli.To i
 Once installed login to hasura using
 
 		$ hasura login
+        
+A login page would open up in your default browser , sign up or login to access the hasura dashboard. Clone the project by copying the following code to your terminal 
+
+		https://github.com/Satyabrat35/MapBox-HPDF.git
 
 ### Prerequisites
 

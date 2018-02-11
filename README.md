@@ -28,44 +28,6 @@ A login page would open up in your default browser , sign up or login to access 
 - [Python 3](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/installing/) (required only for local development)
 - [Mapbox API](https://www.mapbox.com/api-documentation/?language=Python#introduction)
 
-### Quickstart
-
-```bash
-# Quickstart from this boilerplate 
-$ hasura quickstart hello-python-flask
-```
-
-The `quickstart` command does the following:
-
-1. Creates a new directory `hello-python-flask` in the current working directory
-2. Creates a free Hasura cluster and sets it as the default for this project
-3. Sets up `hello-python-flask` as a git repository and adds `hasura` remote to push code
-4. Adds your SSH public key to the cluster so that you can push to it
-
-### Deploy
-
-```bash
-# Navigate to the project directory
-$ cd hello-python-flask
-
-# git add, commit and push to deploy
-$ git add . && git commit -m "First commit"
-$ git push hasura master
-```
-
-Once the git push goes through, Flask microservice (called `app`) will be available at a URL.
-
-```bash
-# Open the flask app url in browser
-$ hasura microservice open app
-```
-
-If the browser shows a "Hasura Hello World" page, everything is working as expected.
-If it doesn't, go through the previous steps and see if you missed anything.
-
-
-## Edit and deploy code
-
 ### Directory structure
 
 The flask microservice is located in `microservices/app` directory in your Hasura project with the following structure:
@@ -77,8 +39,12 @@ The flask microservice is located in `microservices/app` directory in your Hasur
 ├── conf
 │   └── gunicorn_config.py       # configuration for the web server
 └── src
-    ├── config.py                # some utilities to configure URLs etc
-    ├── hasura.py                # hasura API examples
+	├── static
+    	└── css                  # contains css files for adding styles
+        └── js                   # contains basic javascript files for authentication purposes
+    ├── templates 
+    	└── html files           # contains static html files compiled with Jinja2 template
+    ├── config.py                # some utilities to configure URLs etc               
     ├── __init__.py              # main Flask app is defined here
     ├── requirements.txt         # python dependency requirements
     └── server.py                # main Flask server code

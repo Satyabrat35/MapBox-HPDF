@@ -91,15 +91,20 @@ Create a microservice
 
 To create a microservice use the following commands:
 
-# To list a number of templates for creating a microservice
+**To list a number of templates for creating a microservice**
+
 	$ hasura microservice template-list
 
-# To create a microservice
+**To create a microservice**
+
 	$ hasura microservice create <ms-name> --template=<template-name>
 
-# Add routes for the microservice
+**Add routes for the microservice**
+
 	$ hasura conf generate-route <ms-name> >> conf/routes.yaml
 	$ hasura conf generate-remote <ms-name> >> conf/ci.yaml
 
 To know more read the [hasura docs](https://docs.hasura.io/)
 
+## Sample preview of project 
+# Home page

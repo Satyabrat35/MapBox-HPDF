@@ -101,5 +101,5 @@ To create a microservice use the following commands:
 	$ hasura conf generate-route <ms-name> >> conf/routes.yaml
 	$ hasura conf generate-remote <ms-name> >> conf/ci.yaml
 
-
+To know more read the [hasura docs](https://docs.hasura.io/)
 

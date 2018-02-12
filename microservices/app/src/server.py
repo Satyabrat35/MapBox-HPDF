@@ -3,8 +3,6 @@ from flask import render_template, request, json ,flash , make_response , redire
 import requests
 import json
 
-global auth_token
-auth_token = None
 
 @app.route("/")
 def home():
@@ -20,6 +18,7 @@ def sup():
 
 @app.route("/change_p")
 def cpass():
+	auth_token = request.cookies.get('Auth_Token')
 	if auth_token != None:
 		return render_template('change_password.html')
 	flash('Login first')	
@@ -47,7 +46,7 @@ def signup():
         "Content-Type": "application/json",
         "Authorization": "Bearer f82e920a8d6d584fe1ad8231f1e64ad417a41679a63fc327"
     }
-    auth_token = None
+    
 
     # Make the query and store response in resp
     if request.form['password'] == request.form['conf_password']:
@@ -87,18 +86,19 @@ def signin():
     headers = {
         "Content-Type": "application/json"
     }
-    auth_token = None
+    
 
     # Make the query and store response in resp
     resp = requests.request("POST", url, data=json.dumps(requestPayload), headers=headers)
 
     # resp.content contains the json response.
+    #print flag
     #print(resp.content)
     data = json.loads(resp.content)
     if "message" in data.keys():
         flash(data["message"])
     else:
-        name = data["username"]
+        name = username
         rsp = make_response(render_template('wel.html',name=name))
         rsp.set_cookie('Auth_Token',data["auth_token"])
         rsp.set_cookie('Name',data["username"])
@@ -108,7 +108,7 @@ def signin():
     
 @app.route('/locate')
 def loc():
-	#auth_token = request.cookies.get('Auth_Token')
+	auth_token = request.cookies.get('Auth_Token')
 	if auth_token != None:
 		return render_template('locate.html')
 	flash('Login first')	
@@ -116,7 +116,7 @@ def loc():
 
 @app.route('/navigate')
 def navigate():
-    #auth_token = request.cookies.get('Auth_Token')
+    auth_token = request.cookies.get('Auth_Token')
     if auth_token != None:
     	return render_template('navigate.html')
     flash('Login first')	
@@ -138,13 +138,16 @@ def logout():
 
     resp = requests.request("POST",url,headers=headers)
     data = json.loads(resp.content)
-    #session.clear()
-    auth_token = None
-    print auth_token
+    
+    
+    #print auth_token
     
     if "message" in data.keys():
         flash(data["message"])
-        return render_template('login.html')
+        rsp = make_response(render_template('login.html'))
+        rsp.delete_cookie('Auth_Token')
+        rsp.delete_cookie('Name')
+        return rsp
     else:
         return render_template('home.html')
 

@@ -43,15 +43,15 @@ def signup():
 
     # Setting headers
     headers = {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer f82e920a8d6d584fe1ad8231f1e64ad417a41679a63fc327"
+        "Content-Type": "application/json"
+        #"Authorization :
     }
     
 
     # Make the query and store response in resp
     if request.form['password'] == request.form['conf_password']:
         resp=requests.request("POST",url=url,data=json.dumps(params),headers=headers)
-        print(resp.content)
+        #print(resp.content)
         sq = json.loads(resp.content)
         if "message" in sq.keys():
             flash(sq["message"])
